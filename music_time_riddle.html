@@ -87,7 +87,6 @@
     box-shadow:0 0 0 2px rgba(245,64,96,.25);
   }
 
-  /* Submit */
   .submit-section { margin-top:48px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px; }
   .submit-btn {
     background:linear-gradient(135deg,var(--pink),#a020f0); border:none; border-radius:16px;
@@ -99,7 +98,6 @@
   .submit-btn:active { transform:translateY(0); }
   .submit-hint { color:var(--muted); font-size:14px; }
 
-  /* Code reveal */
   .code-result {
     display:none; margin-top:48px;
     background:var(--card); border:1px solid var(--border); border-radius:20px;
@@ -117,7 +115,6 @@
   @keyframes pulseGlow { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.4)} }
   .code-hint-text { color:var(--muted); font-size:15px; margin-top:14px; }
 
-  /* Prize */
   .prize-section {
     margin-top:40px;
     background:linear-gradient(135deg,rgba(245,200,66,.06),rgba(224,64,160,.06));
@@ -144,19 +141,9 @@
   }
   .unlock-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(245,200,66,.4); }
 
-  /* Prize player */
   .prize-player { display:none; flex-direction:column; align-items:center; gap:20px; margin-top:24px; animation:fadeUp .5s ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-  .prize-player-inner { background:var(--surface); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:16px; width:100%; max-width:500px; }
-  .prize-play-btn {
-    width:56px; height:56px; border-radius:50%; border:none;
-    background:linear-gradient(135deg,var(--teal),#20e8a0);
-    color:var(--bg); font-size:22px; cursor:pointer; flex-shrink:0;
-    transition:transform .15s,box-shadow .2s; display:flex; align-items:center; justify-content:center;
-  }
-  .prize-play-btn:hover { transform:scale(1.1); box-shadow:0 0 25px rgba(61,245,200,.5); }
 
-  /* Clown overlay */
   .clown-overlay {
     display:none; position:fixed; top:0; left:0; width:100%; height:100%;
     background:rgba(8,3,16,.94); z-index:200;
@@ -185,7 +172,6 @@
 
 <canvas id="confetti"></canvas>
 
-<!-- Clown overlay -->
 <div class="clown-overlay" id="clownOverlay">
   <span class="clown-emoji">🤡</span>
   <div class="clown-title">לא נכון!</div>
@@ -218,14 +204,12 @@
     <div class="submit-hint">ודאו שבחרתם עשור לכל השירים לפני שתלחצו</div>
   </div>
 
-  <!-- Code result (shown after submit) -->
   <div class="code-result" id="codeResult">
     <div class="code-result-title">הקוד שלכם הוא:</div>
     <div class="code-number" id="codeNumber">---</div>
     <div class="code-hint-text">הכניסו את הקוד למטה כדי לפתוח את שיר הפרס 👇</div>
   </div>
 
-  <!-- Prize -->
   <div class="prize-section">
     <div class="prize-title">🏅 שיר הפרס</div>
     <div class="prize-sub">הזינו את הקוד שקיבלתם כדי לפתוח</div>
@@ -237,7 +221,7 @@
     <div class="prize-player" id="prizePlayer">
       <div style="font-size:40px;margin-top:10px">🎊🎉🎊</div>
       <div style="font-size:22px;font-weight:700;color:var(--gold)">האם הצלחתם לפצח?</div>
-      <video id="prizeVideo" src="שירים/האם הצלחתם לפצח.mp4" controls
+      <video id="prizeVideo" src="האם הצלחתם לפצח.mp4" controls
         style="width:100%;max-width:620px;border-radius:16px;margin-top:10px;box-shadow:0 8px 40px rgba(0,0,0,0.7);">
       </video>
     </div>
@@ -245,17 +229,16 @@
 </div>
 
 <script>
-// Each song's pts: sum when all correct = 18+19+18+19+18+19+18+19+19 = 167
 const SONGS_RAW = [
-  { title:"מתי כתבו אותי",                   file:"שירים/מתי כתבו אותי.mp3",                answer:1600, pts:18 },
-  { title:"מי מכיר את השיר",                  file:"שירים/מי מכיר את השיר.mp3",              answer:1930, pts:19 },
-  { title:"במילים יש רמז",                    file:"שירים/במילים יש רמז.mp3",                answer:1940, pts:18 },
-  { title:"קללל",                              file:"שירים/קללל.mp3",                          answer:1960, pts:19 },
-  { title:"שיר נישתי – אתם בטח לא מכירים",   file:"שירים/שיר נישתי אתם בטח לא מכירים.mp3", answer:1970, pts:18 },
-  { title:"מפחיד",                             file:"שירים/מפחיד.mp3",                         answer:1980, pts:19 },
-  { title:"איך קוראים לשיר?",                 file:"שירים/איך קוראים לשיר.mp3",               answer:1990, pts:18 },
-  { title:"מי אני ומה שמי",                   file:"שירים/מי אני ומה שמי.mp3",                answer:2000, pts:19 },
-  { title:"באיזה שפה זה",                     file:"שירים/באיזה שפה זה.mp3",                  answer:2010, pts:19 },
+  { title:"מתי כתבו אותי",                   file:"מתי כתבו אותי.mp3",                answer:1600, pts:18 },
+  { title:"מי מכיר את השיר",                  file:"מי מכיר את השיר.mp3",              answer:1930, pts:19 },
+  { title:"במילים יש רמז",                    file:"במילים יש רמז.mp3",                answer:1940, pts:18 },
+  { title:"קללל",                              file:"קללל.mp3",                          answer:1960, pts:19 },
+  { title:"שיר נישתי – אתם בטח לא מכירים",   file:"שיר נישתי אתם בטח לא מכירים.mp3", answer:1970, pts:18 },
+  { title:"מפחיד",                             file:"מפחיד.mp3",                         answer:1980, pts:19 },
+  { title:"איך קוראים לשיר?",                 file:"איך קוראים לשיר.mp3",               answer:1990, pts:18 },
+  { title:"מי אני ומה שמי",                   file:"מי אני ומה שמי.mp3",                answer:2000, pts:19 },
+  { title:"באיזה שפה זה",                     file:"באיזה שפה זה.mp3",                  answer:2010, pts:19 },
 ];
 const SONGS = SONGS_RAW.sort(() => Math.random() - 0.5).map((s, i) => ({...s, id: i+1}));
 
@@ -279,7 +262,6 @@ const DECADES = [
 
 let currentAudio = null, currentPlayBtn = null;
 
-// Stars
 (function() {
   const c = document.getElementById('stars');
   for (let i=0; i<80; i++) {
@@ -291,7 +273,6 @@ let currentAudio = null, currentPlayBtn = null;
   }
 })();
 
-// Build cards
 (function() {
   const grid = document.getElementById('songsGrid');
   SONGS.forEach(song => {
